@@ -14,11 +14,15 @@ class BeersController < ApplicationController
 
   # GET /beers/new
   def new
+    @breweries = Brewery.all
     @beer = Beer.new
+    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
   end
 
   # GET /beers/1/edit
   def edit
+    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
+    @breweries = Brewery.all
   end
 
   # POST /beers
@@ -28,13 +32,14 @@ class BeersController < ApplicationController
 
     respond_to do |format|
       if @beer.save
-        format.html { redirect_to @beer, notice: 'Beer was successfully created.' }
+        format.html { redirect_to beers_path, notice: 'Beer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @beer }
       else
         format.html { render action: 'new' }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /beers/1
