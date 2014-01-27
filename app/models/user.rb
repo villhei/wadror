@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
                          format: { with: /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
                                    message: "Numerical character and an uppercase required"}
    
-   has_many :ratings
+   has_many :ratings, dependent: :destroy
 
     has_secure_password
 end
